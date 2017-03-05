@@ -7,8 +7,8 @@
 #include <errno.h>
 #include <iostream>
 
-#define  local_port                 	 12345
-#define  local_ip                  	 "0.0.0.0"   
+#define  local_port                12345
+#define  local_ip                  "0.0.0.0"   
 #define  MAX_EVENTS                100   
 #define  MAX_BUFFER                1024
 
