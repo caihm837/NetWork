@@ -1,0 +1,44 @@
+ARCHIVE := $(shell uname -m)
+BIT32 := i686
+BIT64 := x86_64
+FPIC=
+ifeq ($(ARCHIVE),$(BIT64))
+        FPIC=-fPIC
+endif
+
+ifndef BUILD_DIR
+BUILD_DIR := ./bin
+endif
+NULL := $(shell mkdir -pv $(BUILD_DIR))
+
+CC = g++
+CFLAGS = -Wall -O -g -std=c++11 
+LDFLAGS = -static -L. -lstdc++
+
+logger := $(BUILD_DIR)/logger
+
+
+SRC = $(wildcard *.cpp)
+OBJS = $(patsubst %.cpp, %.o, $(SRC))
+
+all: $(logger)  
+
+$(logger):$(OBJS)
+	g++ -o $@ $^ $(LDFLAGS)
+
+%.o: %.cpp
+	@echo 'Building file:'
+	g++ -c $(CFLAGS) $< -o $@ 
+
+.PHONY: clean
+
+clean:
+	rm -rf *.o  $(BUILD_DIR)
+
+
+
+
+
+
+
+
